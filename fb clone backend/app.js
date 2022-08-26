@@ -1,8 +1,10 @@
 const express = require('express');
 const app= express();
-const port=8000;
-const mongoose=require('mongoose')
+const port=3535;
+const mongoose=require('mongoose');
+
 const user=require('./router/user')
+const post=require('./router/post')
 
 
 app.use(express.json())
@@ -15,6 +17,7 @@ con.on("open",()=>{
     console.log('monogoDB conneted..!')
 })
 app.use('/user',user)
+app.use('/post',post)
 
 
 app.listen(port,()=>{
