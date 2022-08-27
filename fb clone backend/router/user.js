@@ -2,6 +2,13 @@ const express=require('express')
 const router=express.Router()
 const User=require('../models/user.model')
 
+router.get('/findAll',async(req,res)=>{
+  const response= await User.find();
+  console.log(response);
+  response!=null ? res.json({code:'200',message:'find All  successfull',data:response.surname}) : 
+                    res.json({code:'500',message:'find All faild',data:null})
+})
+
 router.post('/login',async(req,res)=>{
     const response= await User.findOne({email : req.body.email , password : req.body.password});
     response!=null ? res.json({code:'200',message:'login  successfull',data:response.surname}) : 
@@ -37,16 +44,7 @@ router.post('/createAccount',async(req,res)=>{
       }else{
       res.json({code:'500',message:'Email is AllreadyExists',data:null});
      }
-
-
-      // tools.existsUser()
-
-       
-      
-        // 
-        // 
-      
-        
+   
       } catch (error) {
         res.send('Err'+error)
       }
